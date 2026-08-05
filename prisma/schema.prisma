@@ -1,0 +1,125 @@
+// GrocerAI — Prisma schema
+// Milestone 2: authentication & database foundation.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+/// How a user authenticated. Matches Better Auth's internal provider ids.
+enum AccountProvider {
+  credential // email + password
+  google // Google OAuth
+}
+
+/// A named category for a saved delivery/billing address.
+enum AddressType {
+  HOME
+  WORK
+  OTHER
+}
+
+// ---------------------------------------------------------------------------
+// Authentication models (managed by Better Auth via the Prisma adapter)
+//
+// NOTE: Better Auth generates its own ids for these tables, so `id` columns
+// are plain `String` (not `@db.Uuid`). Custom models like `Address` use UUIDs.
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts  Account[]
+  sessions  Session[]
+  addresses Address[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String            @id
+  accountId             String
+  providerId            AccountProvider
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String? // only set for the `credential` provider
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verifications")
+}
+
+// ---------------------------------------------------------------------------
+// Custom domain model — saved addresses (Milestone 3+: delivery & checkout)
+// ---------------------------------------------------------------------------
+
+model Address {
+  id         String      @id @default(uuid()) @db.Uuid
+  label      String      @default("Home")
+  type       AddressType @default(HOME)
+  line1      String
+  line2      String?
+  city       String
+  state      String?
+  postalCode String?
+  country    String      @default("US")
+  isDefault  Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@index([userId])
+  @@map("addresses")
+}

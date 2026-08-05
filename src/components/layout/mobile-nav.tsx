@@ -4,11 +4,17 @@ import { Menu } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
 import { NAV_LINKS } from "@/constants/nav"
+import { AuthActions } from "@/features/auth/components/auth-actions"
 import { cn } from "@/lib/utils"
 
 export function MobileNav() {
@@ -42,16 +48,10 @@ export function MobileNav() {
             ))}
           </nav>
           <div className="mt-auto flex flex-col gap-2 border-t pt-4">
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/sign-in" onClick={() => setOpen(false)}>
-                Sign in
-              </Link>
-            </Button>
-            <Button asChild className="w-full">
-              <Link href="/assistant" onClick={() => setOpen(false)}>
-                Build my cart
-              </Link>
-            </Button>
+            <AuthActions
+              variant="mobile"
+              onClickNav={() => setOpen(false)}
+            />
           </div>
         </SheetContent>
       </Sheet>

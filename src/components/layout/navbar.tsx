@@ -9,6 +9,7 @@ import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { NAV_LINKS } from "@/constants/nav"
+import { AuthActions } from "@/features/auth/components/auth-actions"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { cn } from "@/lib/utils"
 
@@ -50,12 +51,7 @@ export function Navbar() {
           <Button variant="ghost" size="icon" aria-label="Your cart">
             <ShoppingCart className="size-4.5" />
           </Button>
-          <Button asChild variant="outline" size="sm" className="ml-1">
-            <Link href="/sign-in">Sign in</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/assistant">Build my cart</Link>
-          </Button>
+          <AuthActions />
         </div>
 
         <div className="lg:hidden">
