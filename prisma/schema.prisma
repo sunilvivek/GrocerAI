@@ -46,6 +46,7 @@ model User {
   accounts  Account[]
   sessions  Session[]
   addresses Address[]
+  favorites Favorite[]
 
   @@map("users")
 }
@@ -122,4 +123,138 @@ model Address {
 
   @@index([userId])
   @@map("addresses")
+}
+
+// ---------------------------------------------------------------------------
+// Catalog & recipes (Milestone 3)
+// ---------------------------------------------------------------------------
+
+/// Cooking difficulty shown on recipe cards.
+enum RecipeDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Category {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String
+  slug           String   @unique
+  description    String?
+  brand          String?
+  image          String?
+  price          Decimal  @db.Decimal(10, 2)
+  compareAtPrice Decimal? @db.Decimal(10, 2) // sale: original price, when set
+  unit           String   @default("each") // display unit: lb, oz, pack, each…
+  unitAmount     Decimal  @default(1) @db.Decimal(8, 2) // e.g. 2 lb, 6 ct
+  stock          Int      @default(0)
+  isFeatured     Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  rating         Float    @default(0)
+  reviewCount    Int      @default(0)
+  tags           String[] @default([])
+  // Nutrition facts (per serving)
+  servingSize    String?
+  calories       Int?
+  proteinGrams   Float?
+  carbsGrams     Float?
+  fatGrams       Float?
+  fiberGrams     Float?
+  sugarGrams     Float?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  category   Category   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  categoryId String     @db.Uuid
+  favorites  Favorite[]
+
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@map("products")
+}
+
+model Ingredient {
+  id       String   @id @default(uuid()) @db.Uuid
+  name     String
+  slug     String   @unique
+  category String? // produce, dairy, pantry, meat, frozen…
+  unit     String   @default("whole") // common unit: whole, cup, tbsp, lb…
+  createdAt DateTime @default(now())
+
+  recipeIngredients RecipeIngredient[]
+
+  @@map("ingredients")
+}
+
+model Recipe {
+  id                String           @id @default(uuid()) @db.Uuid
+  title             String
+  slug              String           @unique
+  description       String?
+  image             String?
+  servings          Int              @default(4)
+  prepTimeMinutes   Int              @default(10)
+  cookTimeMinutes   Int              @default(20)
+  difficulty        RecipeDifficulty @default(EASY)
+  caloriesPerServing Int?
+  tags              String[]         @default([])
+  isPublished       Boolean          @default(true)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  ingredients RecipeIngredient[]
+  favorites   Favorite[]
+
+  @@index([isPublished])
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id           String  @id @default(uuid()) @db.Uuid
+  quantity     Decimal @db.Decimal(8, 2)
+  unit         String  @default("whole")
+  note         String? // e.g. "diced", "room temperature"
+
+  recipe     Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId   String     @db.Uuid
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
+  ingredientId String   @db.Uuid
+
+  @@unique([recipeId, ingredientId])
+  @@index([ingredientId])
+  @@map("recipe_ingredients")
+}
+
+/// A saved product or recipe. Exactly one of `product` / `recipe` is set.
+model Favorite {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String?  @db.Uuid
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId  String?  @db.Uuid
+
+  @@unique([userId, productId])
+  @@unique([userId, recipeId])
+  @@index([userId])
+  @@map("favorites")
 }
