@@ -31,8 +31,8 @@ export const auth = betterAuth({
   socialProviders: googleOAuthEnabled
     ? {
         google: {
-          clientId: googleClientId,
-          clientSecret: googleClientSecret,
+          clientId: googleClientId as string,
+          clientSecret: googleClientSecret as string,
           redirectURI: betterAuthUrl
             ? `${betterAuthUrl}/api/auth/callback/google`
             : undefined,

@@ -1,6 +1,5 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -13,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { zodFormResolver } from "@/lib/form"
 
 import { PasswordInput } from "@/features/auth/components/password-input"
 import { SettingsNote } from "@/features/settings/components/settings-note"
@@ -25,7 +25,7 @@ export function ChangePassword() {
   const [submitted, setSubmitted] = useState(false)
 
   const form = useForm<ChangePasswordValues>({
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodFormResolver<ChangePasswordValues>(changePasswordSchema),
     defaultValues: { currentPassword: "", newPassword: "", confirmPassword: "" },
   })
 

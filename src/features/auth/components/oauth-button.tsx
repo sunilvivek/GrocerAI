@@ -1,7 +1,6 @@
 "use client"
 
 import { Loader2 } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -21,7 +20,6 @@ export function OAuthButton({
   callbackURL = "/profile",
   onError,
 }: OAuthButtonProps) {
-  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleSignIn() {

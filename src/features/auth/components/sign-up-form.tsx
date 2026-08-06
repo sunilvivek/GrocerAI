@@ -1,6 +1,5 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
+import { zodFormResolver } from "@/lib/form"
 
 import { AuthForm } from "@/features/auth/components/auth-form"
 import { OAuthButton } from "@/features/auth/components/oauth-button"
@@ -36,7 +36,7 @@ export function SignUpForm({
   const [error, setError] = useState<string | null>(null)
 
   const form = useForm<SignUpValues>({
-    resolver: zodResolver(signUpSchema),
+    resolver: zodFormResolver<SignUpValues>(signUpSchema),
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   })
 

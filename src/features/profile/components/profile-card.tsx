@@ -20,7 +20,9 @@ const STATS = [
 ]
 
 interface ProfileCardProps {
-  user: Pick<User, "id" | "name" | "email" | "image" | "createdAt">
+  user: Pick<User, "id" | "name" | "email" | "createdAt"> & {
+    image?: string | null
+  }
   provider: string | null
 }
 

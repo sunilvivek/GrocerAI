@@ -1,10 +1,9 @@
 "use client"
 
 import { Loader2 } from "lucide-react"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 
 export interface AuthFormProps {
   title: string

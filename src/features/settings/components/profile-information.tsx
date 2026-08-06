@@ -1,6 +1,5 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -14,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { zodFormResolver } from "@/lib/form"
 
 import { SettingsNote } from "@/features/settings/components/settings-note"
 import { profileSchema, type ProfileValues } from "@/features/auth/validators"
@@ -26,7 +26,7 @@ export function ProfileInformation({ user }: ProfileInformationProps) {
   const [saved, setSaved] = useState(false)
 
   const form = useForm<ProfileValues>({
-    resolver: zodResolver(profileSchema),
+    resolver: zodFormResolver<ProfileValues>(profileSchema),
     defaultValues: { name: user.name, email: user.email },
   })
 
