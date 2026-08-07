@@ -1,15 +1,15 @@
 "use client"
 
-import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 
 import { Container } from "@/components/layout/container"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
-import { Button } from "@/components/ui/button"
 import { NAV_LINKS } from "@/constants/nav"
 import { AuthActions } from "@/features/auth/components/auth-actions"
+import { CartBadge } from "@/features/cart/components/cart-badge"
+import { CartMerge } from "@/features/cart/components/cart-merge"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { cn } from "@/lib/utils"
 
@@ -25,6 +25,7 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
+      <CartMerge />
       <Container className="flex h-16 items-center justify-between gap-4">
         <Logo />
 
@@ -48,9 +49,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
-          <Button variant="ghost" size="icon" aria-label="Your cart">
-            <ShoppingCart className="size-4.5" />
-          </Button>
+          <CartBadge />
           <AuthActions />
         </div>
 

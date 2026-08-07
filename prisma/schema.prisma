@@ -50,7 +50,6 @@ model User {
 
   @@map("users")
 }
-
 model Session {
   id        String   @id
   token     String   @unique
@@ -183,6 +182,7 @@ model Product {
   category   Category   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   categoryId String     @db.Uuid
   favorites  Favorite[]
+  cartItems  CartItem[]
 
   @@index([categoryId])
   @@index([isFeatured])
@@ -257,4 +257,41 @@ model Favorite {
   @@unique([userId, recipeId])
   @@index([userId])
   @@map("favorites")
+}
+
+// ---------------------------------------------------------------------------
+// Shopping cart (Milestone 5)
+//
+// A cart is keyed by `ownerId`, which is either the signed-in user id or an
+// opaque anonymous token stored in a cookie. Guests and signed-in users share
+// the same shape, which lets us merge an anonymous cart into a user's cart
+// after login.
+// ---------------------------------------------------------------------------
+
+model Cart {
+  id        String     @id @default(uuid()) @db.Uuid
+  ownerId   String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id            String   @id @default(uuid()) @db.Uuid
+  quantity      Int      @default(1)
+  savedForLater Boolean  @default(false) // moved to "Save for later"
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    String  @db.Uuid
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  productId String  @db.Uuid
+
+  @@unique([cartId, productId])
+  @@index([productId])
+  @@map("cart_items")
 }

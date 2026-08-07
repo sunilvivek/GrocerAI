@@ -15,6 +15,7 @@ import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
 import { NAV_LINKS } from "@/constants/nav"
 import { AuthActions } from "@/features/auth/components/auth-actions"
+import { CartBadge } from "@/features/cart/components/cart-badge"
 import { cn } from "@/lib/utils"
 
 export function MobileNav() {
@@ -23,6 +24,7 @@ export function MobileNav() {
   return (
     <div className="flex items-center gap-1.5 lg:hidden">
       <ThemeToggle />
+      <CartBadge />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="Open navigation menu">
