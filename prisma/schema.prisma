@@ -181,6 +181,7 @@ model Product {
   id             String   @id @default(uuid()) @db.Uuid
   name           String
   slug           String   @unique
+  sku            String?  @unique
   description    String?
   brand          String?
   image          String?
