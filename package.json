@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "check": "pnpm lint && pnpm typecheck",
     "db:seed": "tsx prisma/seed.ts",
+    "db:admin": "tsx prisma/scripts/make-admin.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {

@@ -2,7 +2,7 @@ import { getSessionCookie } from "better-auth/cookies"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-const PROTECTED_PATH_PREFIXES = ["/profile", "/settings"]
+const PROTECTED_PATH_PREFIXES = ["/profile", "/settings", "/admin"]
 
 const PUBLIC_ROUTES = ["/sign-in", "/sign-up", "/forgot-password"]
 
