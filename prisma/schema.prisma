@@ -26,6 +26,24 @@ enum UserRole {
   ADMIN
 }
 
+/// Lifecycle of a customer order. Transitions are enforced in the order service.
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PACKED
+  SHIPPED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
 /// A named category for a saved delivery/billing address.
 enum AddressType {
   HOME
@@ -54,6 +72,7 @@ model User {
   sessions  Session[]
   addresses Address[]
   favorites Favorite[]
+  orders    Order[]
 
   @@map("users")
 }
@@ -190,6 +209,7 @@ model Product {
   categoryId String     @db.Uuid
   favorites  Favorite[]
   cartItems  CartItem[]
+  orderItems OrderItem[]
 
   @@index([categoryId])
   @@index([isFeatured])
@@ -301,4 +321,67 @@ model CartItem {
   @@unique([cartId, productId])
   @@index([productId])
   @@map("cart_items")
+}
+
+// ---------------------------------------------------------------------------
+// Orders (Milestone 6: admin + checkout)
+//
+// A snapshot of the purchase: products, quantities, prices, and the delivery
+// address at the time of the order. Prices are denormalized onto the items so
+// the history stays accurate even if a product's price changes later.
+// ---------------------------------------------------------------------------
+
+model Order {
+  id        String      @id @default(uuid()) @db.Uuid
+  orderNumber String    @unique
+  status    OrderStatus @default(PENDING)
+  paymentStatus PaymentStatus @default(PENDING)
+
+  // Money fields (all in USD)
+  subtotal     Decimal @db.Decimal(10, 2)
+  discount     Decimal @db.Decimal(10, 2) @default(0)
+  deliveryFee  Decimal @db.Decimal(10, 2) @default(0)
+  tax          Decimal @db.Decimal(10, 2) @default(0)
+  total        Decimal @db.Decimal(10, 2)
+
+  // Snapshot of the delivery destination.
+  deliveryName   String
+  deliveryPhone  String?
+  deliveryLine1  String
+  deliveryLine2  String?
+  deliveryCity   String
+  deliveryState  String?
+  deliveryPostal String?
+  deliveryCountry String @default("US")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId String
+  items  OrderItem[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid()) @db.Uuid
+  quantity  Int
+  unitPrice Decimal @db.Decimal(10, 2) // price paid per unit at order time
+  // Snapshot of the product so admin views survive product edits/deletes.
+  productName  String
+  productSlug  String?
+  productImage String?
+
+  order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId  String  @db.Uuid
+  product  Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productId String? @db.Uuid
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
 }
