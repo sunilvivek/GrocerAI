@@ -5,3 +5,5 @@ allowBuilds:
   prisma: true
   "@prisma/client": true
   esbuild: true
+  onnxruntime-node: true
+  protobufjs: true

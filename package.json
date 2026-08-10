@@ -23,6 +23,7 @@
   "dependencies": {
     "@ai-sdk/openai": "^4.0.31",
     "@hookform/resolvers": "^5.7.1",
+    "@huggingface/transformers": "^4.2.0",
     "@prisma/client": "^6.19.3",
     "ai": "^7.0.55",
     "better-auth": "^1.6.26",

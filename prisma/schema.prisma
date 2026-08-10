@@ -210,8 +210,9 @@ model Product {
   // Semantic search (Milestone 7). `embedding` is a pgvector column managed
   // via raw SQL — it is intentionally `Unsupported` so Prisma never reads or
   // writes it. `embeddingUpdatedAt` lets the indexer skip unchanged rows.
-  embedding          Unsupported("vector(1536)")? @default(dbgenerated())
-  embeddingUpdatedAt DateTime?
+  // Dimension (384) matches the default local provider (all-MiniLM-L6-v2).
+  embedding           Unsupported("vector(384)")? @default(dbgenerated())
+  embeddingUpdatedAt  DateTime?
 
   category   Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   categoryId String      @db.Uuid
@@ -257,7 +258,7 @@ model Recipe {
   updatedAt          DateTime         @updatedAt
 
   // Semantic search (Milestone 7) — see Product.embedding.
-  embedding          Unsupported("vector(1536)")? @default(dbgenerated())
+  embedding          Unsupported("vector(384)")? @default(dbgenerated())
   embeddingUpdatedAt DateTime?
 
   ingredients RecipeIngredient[]
