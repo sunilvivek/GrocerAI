@@ -14,3 +14,8 @@ const provider = createOpenAI({
 export function getChatModel() {
   return provider(aiConfig.model)
 }
+
+/** Returns an embedding model for the configured embedding model id. */
+export function getEmbeddingModel() {
+  return provider.embedding(aiConfig.embeddingModel)
+}
