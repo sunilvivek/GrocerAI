@@ -236,12 +236,14 @@ model Recipe {
   slug              String           @unique
   description       String?
   image             String?
+  cuisine           String?
   servings          Int              @default(4)
   prepTimeMinutes   Int              @default(10)
   cookTimeMinutes   Int              @default(20)
   difficulty        RecipeDifficulty @default(EASY)
   caloriesPerServing Int?
   tags              String[]         @default([])
+  instructions      String[]         @default([])
   isPublished       Boolean          @default(true)
   createdAt         DateTime         @default(now())
   updatedAt         DateTime         @updatedAt
