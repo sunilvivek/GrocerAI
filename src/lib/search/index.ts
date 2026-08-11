@@ -26,6 +26,7 @@ export {
   type RankingWeights,
 } from "@/lib/search/ranking"
 export { toSearchResult } from "@/lib/search/utils"
+export { searchProducts } from "@/lib/search/service"
 export { embedManyTexts, embedText } from "@/lib/search/embedding"
 export { indexEmbeddings } from "@/lib/search/indexer"
 export {
