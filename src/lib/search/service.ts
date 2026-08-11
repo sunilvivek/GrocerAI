@@ -53,6 +53,7 @@ export async function searchProducts(query: SearchQuery): Promise<SearchResponse
     semanticRanking = await searchProductsByVector(q, {
       limit: pageSize * 4,
       minSimilarity: MIN_SEMANTIC_SIMILARITY,
+      availableOnly: filters.availableOnly !== false,
     })
   }
 
@@ -69,7 +70,11 @@ export async function searchProducts(query: SearchQuery): Promise<SearchResponse
   }
 
   const rows = await prisma.product.findMany({
-    where: { id: { in: [...candidateIds] }, isActive: true },
+    where: {
+      id: { in: [...candidateIds] },
+      isActive: true,
+      ...(filters.categorySlug ? { category: { slug: filters.categorySlug } } : {}),
+    },
     include: { category: true },
   })
 

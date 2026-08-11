@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client"
+
 import { prisma } from "@/lib/prisma"
 import { embedText } from "@/lib/search/embedding"
 import type {
@@ -16,7 +18,7 @@ export async function searchProductsByVector(
   query: string,
   options: SemanticSearchOptions = {},
 ): Promise<ProductMatch[]> {
-  const { limit = 20, minSimilarity = 0 } = options
+  const { limit = 20, minSimilarity = 0, availableOnly = true } = options
   const vector = await embedText(query)
   if (!vector) return []
 
@@ -26,7 +28,7 @@ export async function searchProductsByVector(
       FROM "products" p
       WHERE p."embedding" IS NOT NULL
         AND p."isActive" = true
-        AND p."stock" > 0
+        ${availableOnly ? Prisma.sql`AND p."stock" > 0` : Prisma.empty}
         AND 1 - (p."embedding" <=> ${toVectorLiteral(vector)}::vector) >= ${minSimilarity}
       ORDER BY p."embedding" <=> ${toVectorLiteral(vector)}::vector
       LIMIT ${limit}

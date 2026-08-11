@@ -86,6 +86,8 @@ export type SemanticSearchOptions = {
   limit?: number
   /** Only return results at least this similar (cosine similarity, 0–1). */
   minSimilarity?: number
+  /** Only return products that are in stock. Defaults to true. */
+  availableOnly?: boolean
 }
 
 export type ProductMatch = {
