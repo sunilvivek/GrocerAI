@@ -100,7 +100,13 @@ export async function searchProducts(query: SearchQuery): Promise<SearchResponse
 
   const sorted =
     query.sort === "relevance"
-      ? [...filtered].sort((a, b) => b.scores.score - a.scores.score)
+      ? [...filtered].sort((a, b) => {
+          const diff = b.scores.score - a.scores.score
+          if (diff !== 0) return diff
+          const semDiff = (b.scores.semanticScore ?? 0) - (a.scores.semanticScore ?? 0)
+          if (semDiff !== 0) return semDiff
+          return a.row.name.localeCompare(b.row.name)
+        })
       : filtered.sort((a, b) => {
           if (query.sort === "price-asc" || query.sort === "price-desc") {
             const cmp = a.row.price.comparedTo(b.row.price)
