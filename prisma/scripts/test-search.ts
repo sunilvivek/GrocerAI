@@ -63,7 +63,7 @@ async function main() {
   const bakeryButter = await searchProducts(
     baseQuery({
       q: "butter",
-      filters: { categorySlug: "dairy", minPrice: 4, maxPrice: 6, availableOnly: true },
+      filters: { categorySlug: "dairy", minPrice: 300, maxPrice: 350, availableOnly: true },
     }),
   )
   assert(bakeryButter.results.length > 0, `filtered "butter" returned ${bakeryButter.results.length} products`)
@@ -71,8 +71,8 @@ async function main() {
     bakeryButter.results.every(
       (r) =>
         r.category.slug === "dairy" &&
-        r.price >= 4 &&
-        r.price <= 6 &&
+        r.price >= 300 &&
+        r.price <= 350 &&
         r.stock > 0,
     ),
     "every filtered result matches category, price range, and availability",

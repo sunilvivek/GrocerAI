@@ -2,13 +2,13 @@ import type { ProductSeed } from "./types"
 
 export const products: ProductSeed[] = [
   // ---- Produce ------------------------------------------------------------
-  {
+{
     name: "Bananas",
     categorySlug: "produce",
     description:
       "Naturally sweet bananas, rich in potassium and perfect for snacking or baking.",
     brand: "Local Harvest",
-    price: 0.59,
+    price: 45,
     unit: "lb",
     unitAmount: 1,
     stock: 240,
@@ -26,14 +26,14 @@ export const products: ProductSeed[] = [
       sugarGrams: 14,
     },
   },
-  {
+{
     name: "Gala Apples (3 lb bag)",
     categorySlug: "produce",
     description:
       "Crisp and juicy Gala apples in a convenient family-sized bag.",
     brand: "Orchard Fresh",
-    price: 3.99,
-    compareAtPrice: 4.99,
+    price: 299,
+    compareAtPrice: 349,
     unit: "3 lb bag",
     unitAmount: 3,
     stock: 90,
@@ -50,12 +50,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 19,
     },
   },
-  {
+{
     name: "Hass Avocados",
     categorySlug: "produce",
     description:
       "Creamy, buttery Hass avocados loaded with healthy monounsaturated fats.",
-    price: 1.49,
+    price: 80,
     unit: "each",
     unitAmount: 1,
     stock: 150,
@@ -73,13 +73,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.7,
     },
   },
-  {
+{
     name: "Baby Spinach (5 oz)",
     categorySlug: "produce",
     description:
       "Tender baby spinach leaves, triple-washed and ready for salads and sautés.",
     brand: "Green Farms",
-    price: 2.49,
+    price: 75,
     unit: "5 oz clamshell",
     unitAmount: 1,
     stock: 120,
@@ -96,12 +96,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.3,
     },
   },
-  {
+{
     name: "Roma Tomatoes",
     categorySlug: "produce",
     description:
       "Firm, meaty Roma tomatoes ideal for sauces, salsa and salads.",
-    price: 1.29,
+    price: 45,
     unit: "lb",
     unitAmount: 1,
     stock: 80,
@@ -118,13 +118,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 3.2,
     },
   },
-  {
+{
     name: "Carrots (2 lb bag)",
     categorySlug: "produce",
     description:
       "Sweet, crunchy carrots perfect for snacking, roasting or juicing.",
     brand: "Root & Co",
-    price: 1.19,
+    price: 60,
     unit: "lb",
     unitAmount: 2,
     stock: 100,
@@ -141,12 +141,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 2.9,
     },
   },
-  {
+{
     name: "Red Onions",
     categorySlug: "produce",
     description:
       "Mild, sweet red onions that add vibrant color to any dish.",
-    price: 1.39,
+    price: 35,
     unit: "lb",
     unitAmount: 1,
     stock: 70,
@@ -163,12 +163,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 4.7,
     },
   },
-  {
+{
     name: "Strawberries (1 lb)",
     categorySlug: "produce",
     description:
       "Bright red, juicy strawberries bursting with natural sweetness.",
-    price: 4.49,
+    price: 250,
     unit: "1 lb",
     unitAmount: 1,
     stock: 60,
@@ -185,12 +185,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 7.4,
     },
   },
-  {
+{
     name: "Broccoli Crowns",
     categorySlug: "produce",
     description:
       "Fresh, crunchy broccoli crowns rich in fiber and vitamin C.",
-    price: 1.99,
+    price: 120,
     unit: "lb",
     unitAmount: 1,
     stock: 95,
@@ -207,12 +207,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 1.5,
     },
   },
-  {
+{
     name: "Lemons",
     categorySlug: "produce",
     description:
       "Bright, tangy lemons for cooking, baking and refreshing drinks.",
-    price: 0.89,
+    price: 10,
     unit: "each",
     unitAmount: 1,
     stock: 130,
@@ -229,13 +229,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1.5,
     },
   },
-  {
+{
     name: "Russet Potatoes (5 lb)",
     categorySlug: "produce",
     description:
       "Starchy Russet potatoes perfect for baking, mashing and frying.",
     brand: "Root & Co",
-    price: 3.49,
+    price: 140,
     unit: "5 lb bag",
     unitAmount: 5,
     stock: 85,
@@ -252,12 +252,12 @@ export const products: ProductSeed[] = [
       sugarGrams: 2.4,
     },
   },
-  {
+{
     name: "Red Bell Peppers",
     categorySlug: "produce",
     description:
       "Sweet, crunchy red bell peppers packed with vitamin C.",
-    price: 1.99,
+    price: 45,
     unit: "each",
     unitAmount: 1,
     stock: 88,
@@ -276,13 +276,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Dairy & Eggs --------------------------------------------------------
-  {
+{
     name: "Large Brown Eggs (dozen)",
     categorySlug: "dairy",
     description:
       "Farm-fresh large brown eggs from pasture-raised hens.",
     brand: "Sunny Meadow",
-    price: 4.29,
+    price: 120,
     unit: "dozen",
     unitAmount: 12,
     stock: 140,
@@ -300,13 +300,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.2,
     },
   },
-  {
+{
     name: "Whole Milk (1 gal)",
     categorySlug: "dairy",
     description:
       "Creamy whole milk from cows raised on family farms.",
     brand: "Valley Dairy",
-    price: 3.89,
+    price: 260,
     unit: "1 gal",
     unitAmount: 1,
     stock: 110,
@@ -323,13 +323,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 12.3,
     },
   },
-  {
+{
     name: "Plain Greek Yogurt (32 oz)",
     categorySlug: "dairy",
     description:
       "Thick, protein-rich plain Greek yogurt with no added sugar.",
     brand: "Olympus",
-    price: 5.49,
+    price: 280,
     unit: "32 oz tub",
     unitAmount: 1,
     stock: 75,
@@ -346,13 +346,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 5,
     },
   },
-  {
+{
     name: "Unsalted Butter (1 lb)",
     categorySlug: "dairy",
     description:
       "Creamy unsalted sweet cream butter for baking and cooking.",
     brand: "Valley Dairy",
-    price: 4.99,
+    price: 320,
     unit: "1 lb",
     unitAmount: 1,
     stock: 95,
@@ -369,13 +369,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Sharp Cheddar (8 oz)",
     categorySlug: "dairy",
     description:
       "Aged sharp cheddar with a rich, tangy flavor. Great for snacking.",
     brand: "Harbor Hill",
-    price: 5.29,
+    price: 280,
     unit: "8 oz block",
     unitAmount: 1,
     stock: 80,
@@ -392,13 +392,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.3,
     },
   },
-  {
+{
     name: "Shredded Mozzarella (8 oz)",
     categorySlug: "dairy",
     description:
       "Low-moisture mozzarella shreds that melt beautifully on pizza and pasta.",
     brand: "Harbor Hill",
-    price: 4.49,
+    price: 230,
     unit: "8 oz bag",
     unitAmount: 1,
     stock: 90,
@@ -415,13 +415,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.5,
     },
   },
-  {
+{
     name: "Cream Cheese (8 oz)",
     categorySlug: "dairy",
     description:
       "Smooth and spreadable cream cheese made with real milk and cream.",
     brand: "Morning Rise",
-    price: 3.29,
+    price: 190,
     unit: "8 oz tub",
     unitAmount: 1,
     stock: 85,
@@ -438,13 +438,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1.4,
     },
   },
-  {
+{
     name: "Half & Half (1 pt)",
     categorySlug: "dairy",
     description:
       "Rich half & half to brighten your morning coffee.",
     brand: "Valley Dairy",
-    price: 2.99,
+    price: 120,
     unit: "1 pt",
     unitAmount: 1,
     stock: 70,
@@ -461,13 +461,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1.3,
     },
   },
-  {
+{
     name: "Cottage Cheese (24 oz)",
     categorySlug: "dairy",
     description:
       "Creamy small-curd cottage cheese, a protein-packed snack.",
     brand: "Morning Rise",
-    price: 4.19,
+    price: 350,
     unit: "24 oz tub",
     unitAmount: 1,
     stock: 65,
@@ -484,13 +484,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 3.9,
     },
   },
-  {
+{
     name: "Unsweetened Almond Milk (1/2 gal)",
     categorySlug: "dairy",
     description:
       "Creamy unsweetened almond milk, a dairy-free favorite.",
     brand: "Green Oak",
-    price: 3.79,
+    price: 220,
     unit: "1/2 gal",
     unitAmount: 1,
     stock: 78,
@@ -507,13 +507,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Heavy Whipping Cream (1 pt)",
     categorySlug: "dairy",
     description:
       "Thick, luxurious heavy cream for whipping and sauces.",
     brand: "Valley Dairy",
-    price: 4.49,
+    price: 160,
     unit: "1 pt",
     unitAmount: 1,
     stock: 60,
@@ -532,13 +532,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Bakery ---------------------------------------------------------------
-  {
+{
     name: "Sourdough Loaf",
     categorySlug: "bakery",
     description:
       "Artisan sourdough with a crispy crust and tangy, chewy crumb.",
     brand: "Golden Crust",
-    price: 5.99,
+    price: 180,
     unit: "1 loaf",
     unitAmount: 1,
     stock: 45,
@@ -556,13 +556,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.5,
     },
   },
-  {
+{
     name: "Whole Wheat Bread",
     categorySlug: "bakery",
     description:
       "Soft whole wheat bread baked with whole grains and no high-fructose syrup.",
     brand: "Golden Crust",
-    price: 3.49,
+    price: 85,
     unit: "24 oz loaf",
     unitAmount: 1,
     stock: 80,
@@ -579,13 +579,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 3,
     },
   },
-  {
+{
     name: "Butter Croissants (4-pack)",
     categorySlug: "bakery",
     description:
       "Flaky, golden croissants made with real butter and laminated dough.",
     brand: "Parisian Bakery",
-    price: 4.79,
+    price: 160,
     unit: "4-pack",
     unitAmount: 4,
     stock: 55,
@@ -602,13 +602,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 6,
     },
   },
-  {
+{
     name: "Bagels (6-pack)",
     categorySlug: "bakery",
     description:
       "Chewy, kettle-boiled plain bagels — perfect toasted with cream cheese.",
     brand: "Big Apple",
-    price: 3.99,
+    price: 180,
     unit: "6-pack",
     unitAmount: 6,
     stock: 70,
@@ -625,13 +625,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 6,
     },
   },
-  {
+{
     name: "Flour Tortillas (10\")",
     categorySlug: "bakery",
     description:
       "Soft, pliable flour tortillas great for wraps, burritos and tacos.",
     brand: "Casa Deli",
-    price: 3.29,
+    price: 140,
     unit: "10-pack",
     unitAmount: 10,
     stock: 90,
@@ -648,13 +648,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Hamburger Buns (8-pack)",
     categorySlug: "bakery",
     description:
       "Soft, sesame-topped buns that hold up to any burger or sandwich.",
     brand: "Golden Crust",
-    price: 3.19,
+    price: 90,
     unit: "8-pack",
     unitAmount: 8,
     stock: 85,
@@ -671,13 +671,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 4,
     },
   },
-  {
+{
     name: "Ciabatta Loaf",
     categorySlug: "bakery",
     description:
       "Rustic Italian ciabatta with a crackly crust and airy crumb.",
     brand: "Parisian Bakery",
-    price: 4.49,
+    price: 150,
     unit: "1 loaf",
     unitAmount: 1,
     stock: 40,
@@ -694,13 +694,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "English Muffins (6-pack)",
     categorySlug: "bakery",
     description:
       "Nooks and crannies galore — classic fork-split English muffins.",
     brand: "Big Apple",
-    price: 3.59,
+    price: 120,
     unit: "6-pack",
     unitAmount: 6,
     stock: 75,
@@ -717,13 +717,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 2,
     },
   },
-  {
+{
     name: "Cinnamon Raisin Bread",
     categorySlug: "bakery",
     description:
       "Sweet cinnamon swirled bread studded with plump raisins.",
     brand: "Golden Crust",
-    price: 4.29,
+    price: 110,
     unit: "20 oz loaf",
     unitAmount: 1,
     stock: 50,
@@ -740,13 +740,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 6,
     },
   },
-  {
+{
     name: "Pita Bread (6-pack)",
     categorySlug: "bakery",
     description:
       "Soft, fluffy pita pockets perfect for wraps and dips.",
     brand: "Casa Deli",
-    price: 3.49,
+    price: 130,
     unit: "6-pack",
     unitAmount: 6,
     stock: 68,
@@ -765,13 +765,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Meat & Seafood --------------------------------------------------------
-  {
+{
     name: "Boneless Chicken Breast",
     categorySlug: "meat-seafood",
     description:
       "Lean, boneless skinless chicken breasts — a dinnertime staple.",
     brand: "Farmstead",
-    price: 6.99,
+    price: 240,
     unit: "lb",
     unitAmount: 1,
     stock: 95,
@@ -789,13 +789,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "93% Lean Ground Turkey",
     categorySlug: "meat-seafood",
     description:
       "Lean ground turkey for burgers, tacos and skillet meals.",
     brand: "Farmstead",
-    price: 5.49,
+    price: 280,
     unit: "1 lb",
     unitAmount: 1,
     stock: 82,
@@ -812,13 +812,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Atlantic Salmon Fillets",
     categorySlug: "meat-seafood",
     description:
       "Omega-3 rich salmon fillets, previously frozen and ready to cook.",
     brand: "Blue Waters",
-    price: 12.99,
+    price: 750,
     unit: "lb",
     unitAmount: 1,
     stock: 48,
@@ -836,13 +836,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "80/20 Ground Beef",
     categorySlug: "meat-seafood",
     description:
       "Juicy, all-purpose ground beef for burgers, meatballs and more.",
     brand: "Farmstead",
-    price: 6.49,
+    price: 380,
     unit: "lb",
     unitAmount: 1,
     stock: 90,
@@ -859,14 +859,14 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Smoked Bacon (12 oz)",
     categorySlug: "meat-seafood",
     description:
       "Thick-cut, hickory-smoked bacon with the perfect balance of salt and smoke.",
     brand: "Farmstead",
-    price: 5.99,
-    compareAtPrice: 6.99,
+    price: 450,
+    compareAtPrice: 499,
     unit: "12 oz",
     unitAmount: 1,
     stock: 65,
@@ -883,13 +883,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Jumbo Shrimp (Raw)",
     categorySlug: "meat-seafood",
     description:
       "Large, peeled and deveined raw shrimp — ready in minutes.",
     brand: "Blue Waters",
-    price: 11.99,
+    price: 550,
     unit: "lb",
     unitAmount: 1,
     stock: 40,
@@ -906,13 +906,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Boneless Pork Chops",
     categorySlug: "meat-seafood",
     description:
       "Thick, center-cut boneless pork chops — juicy and quick to cook.",
     brand: "Farmstead",
-    price: 7.49,
+    price: 320,
     unit: "lb",
     unitAmount: 1,
     stock: 58,
@@ -929,13 +929,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Whole Chicken",
     categorySlug: "meat-seafood",
     description:
       "Farm-raised whole chicken, perfect for roasting the family dinner.",
     brand: "Farmstead",
-    price: 2.49,
+    price: 299,
     unit: "lb",
     unitAmount: 4,
     stock: 35,
@@ -952,13 +952,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Italian Sausage (19 oz)",
     categorySlug: "meat-seafood",
     description:
       "Seasoned sweet Italian sausage links, perfect for grilling and sauces.",
     brand: "Farmstead",
-    price: 5.29,
+    price: 350,
     unit: "19 oz pack",
     unitAmount: 1,
     stock: 70,
@@ -975,13 +975,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Atlantic Cod Fillets",
     categorySlug: "meat-seafood",
     description:
       "Mild, flaky cod fillets — versatile and light on the table.",
     brand: "Blue Waters",
-    price: 10.99,
+    price: 680,
     unit: "lb",
     unitAmount: 1,
     stock: 38,
@@ -998,13 +998,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Oven-Roasted Turkey Deli Slices",
     categorySlug: "meat-seafood",
     description:
       "Thin-sliced oven-roasted turkey breast for healthy sandwiches.",
     brand: "Farmstead",
-    price: 6.99,
+    price: 400,
     unit: "1 lb",
     unitAmount: 1,
     stock: 55,
@@ -1023,13 +1023,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Pantry & Grains ---------------------------------------------------------
-  {
+{
     name: "Long Grain White Rice (2 lb)",
     categorySlug: "pantry",
     description:
       "Fluffy long grain white rice — the perfect side to any meal.",
     brand: "Harvest Moon",
-    price: 4.99,
+    price: 140,
     unit: "2 lb",
     unitAmount: 2,
     stock: 130,
@@ -1047,13 +1047,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Penne Pasta (16 oz)",
     categorySlug: "pantry",
     description:
       "Classic penne rigate pasta, made with 100% durum wheat.",
     brand: "Casa Bella",
-    price: 1.99,
+    price: 120,
     unit: "16 oz",
     unitAmount: 1,
     stock: 160,
@@ -1070,13 +1070,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Extra Virgin Olive Oil (500 ml)",
     categorySlug: "pantry",
     description:
       "Cold-pressed extra virgin olive oil with a fruity, peppery finish.",
     brand: "Casa Bella",
-    price: 9.99,
+    price: 750,
     unit: "500 ml",
     unitAmount: 1,
     stock: 75,
@@ -1094,13 +1094,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Quinoa (16 oz)",
     categorySlug: "pantry",
     description:
       "Fluffy, protein-packed quinoa — a complete plant-based protein.",
     brand: "Harvest Moon",
-    price: 7.49,
+    price: 320,
     unit: "16 oz",
     unitAmount: 1,
     stock: 88,
@@ -1117,13 +1117,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Creamy Peanut Butter (16 oz)",
     categorySlug: "pantry",
     description:
       "Smooth peanut butter made from just peanuts and a pinch of salt.",
     brand: "Nuts & More",
-    price: 3.99,
+    price: 260,
     unit: "16 oz jar",
     unitAmount: 1,
     stock: 95,
@@ -1140,13 +1140,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 3,
     },
   },
-  {
+{
     name: "Diced Fire-Roasted Tomatoes",
     categorySlug: "pantry",
     description:
       "Fire-roasted diced tomatoes in rich tomato juice — a pantry staple.",
     brand: "Rustic Roast",
-    price: 1.29,
+    price: 95,
     unit: "14.5 oz can",
     unitAmount: 1,
     stock: 140,
@@ -1163,13 +1163,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 4.5,
     },
   },
-  {
+{
     name: "Black Beans (15 oz)",
     categorySlug: "pantry",
     description:
       "Low-sodium black beans, ready for soups, tacos and burrito bowls.",
     brand: "Rustic Roast",
-    price: 1.19,
+    price: 110,
     unit: "15 oz can",
     unitAmount: 1,
     stock: 150,
@@ -1186,13 +1186,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.3,
     },
   },
-  {
+{
     name: "Chicken Broth (32 oz)",
     categorySlug: "pantry",
     description:
       "Rich, savory chicken broth made from real roasted chicken.",
     brand: "Broth & Co",
-    price: 2.49,
+    price: 140,
     unit: "32 oz carton",
     unitAmount: 1,
     stock: 110,
@@ -1209,13 +1209,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Rolled Oats (18 oz)",
     categorySlug: "pantry",
     description:
       "100% whole grain rolled oats for oatmeal, baking and overnight oats.",
     brand: "Harvest Moon",
-    price: 4.19,
+    price: 220,
     unit: "18 oz",
     unitAmount: 1,
     stock: 100,
@@ -1232,13 +1232,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Raw Honey (12 oz)",
     categorySlug: "pantry",
     description:
       "Unfiltered raw honey with a sweet, floral flavor. Perfect in tea.",
     brand: "Hive & Bloom",
-    price: 6.49,
+    price: 280,
     unit: "12 oz jar",
     unitAmount: 1,
     stock: 72,
@@ -1255,13 +1255,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 17,
     },
   },
-  {
+{
     name: "Roasted Salsa Roja (16 oz)",
     categorySlug: "pantry",
     description:
       "Fire-roasted tomato salsa with a kick of smoky chipotle.",
     brand: "Casa Deli",
-    price: 3.49,
+    price: 180,
     unit: "16 oz jar",
     unitAmount: 1,
     stock: 85,
@@ -1280,13 +1280,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Beverages ---------------------------------------------------------------
-  {
+{
     name: "Cold Brew Coffee (32 oz)",
     categorySlug: "beverages",
     description:
       "Smooth, low-acidity cold brew brewed slowly for 18 hours.",
     brand: "Daily Grind",
-    price: 4.99,
+    price: 290,
     unit: "32 oz",
     unitAmount: 1,
     stock: 60,
@@ -1304,13 +1304,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Orange Juice (52 oz)",
     categorySlug: "beverages",
     description:
       "100% pure squeezed orange juice with no pulp, no added sugar.",
     brand: "Sunrise Grove",
-    price: 4.29,
+    price: 260,
     unit: "52 oz",
     unitAmount: 1,
     stock: 80,
@@ -1327,13 +1327,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 22,
     },
   },
-  {
+{
     name: "Sparkling Water Lime (12-pack)",
     categorySlug: "beverages",
     description:
       "Crisp, zero-calorie sparkling water with a hint of lime.",
     brand: "Fizz&Co",
-    price: 5.99,
+    price: 350,
     unit: "12-pack",
     unitAmount: 12,
     stock: 120,
@@ -1350,13 +1350,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Green Tea (12-pack)",
     categorySlug: "beverages",
     description:
       "Bottled green tea brewed from real leaves — lightly sweetened.",
     brand: "Tea House",
-    price: 4.49,
+    price: 280,
     unit: "12-pack",
     unitAmount: 12,
     stock: 95,
@@ -1373,13 +1373,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 10,
     },
   },
-  {
+{
     name: "Organic Apple Juice (64 oz)",
     categorySlug: "beverages",
     description:
       "Pressed from organic apples — pure, unsweetened apple goodness.",
     brand: "Sunrise Grove",
-    price: 3.79,
+    price: 320,
     unit: "64 oz",
     unitAmount: 1,
     stock: 88,
@@ -1396,13 +1396,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 26,
     },
   },
-  {
+{
     name: "Coconut Water (33.8 oz)",
     categorySlug: "beverages",
     description:
       "Naturally hydrating coconut water with electrolytes and potassium.",
     brand: "Pure & Natural",
-    price: 3.49,
+    price: 190,
     unit: "33.8 oz",
     unitAmount: 1,
     stock: 70,
@@ -1419,13 +1419,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 6,
     },
   },
-  {
+{
     name: "Ginger Kombucha (16 oz)",
     categorySlug: "beverages",
     description:
       "Live, fermented kombucha with zingy ginger and gut-friendly cultures.",
     brand: "Live Culture",
-    price: 4.29,
+    price: 240,
     unit: "16 oz",
     unitAmount: 1,
     stock: 55,
@@ -1442,13 +1442,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 6,
     },
   },
-  {
+{
     name: "Whole Milk Kefir (32 oz)",
     categorySlug: "beverages",
     description:
       "Creamy, probiotic-rich kefir with 12 live cultures.",
     brand: "Live Culture",
-    price: 5.29,
+    price: 290,
     unit: "32 oz",
     unitAmount: 1,
     stock: 45,
@@ -1465,13 +1465,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 9,
     },
   },
-  {
+{
     name: "Ceremonial Matcha (1 oz)",
     categorySlug: "beverages",
     description:
       "Stone-ground ceremonial grade matcha with a vibrant green hue.",
     brand: "Tea House",
-    price: 12.99,
+    price: 1200,
     unit: "1 oz tin",
     unitAmount: 1,
     stock: 30,
@@ -1488,13 +1488,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Whole Bean Coffee (12 oz)",
     categorySlug: "beverages",
     description:
       "Medium roast whole beans with notes of chocolate and caramel.",
     brand: "Daily Grind",
-    price: 11.99,
+    price: 750,
     unit: "12 oz bag",
     unitAmount: 1,
     stock: 50,
@@ -1513,13 +1513,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Snacks -----------------------------------------------------------------
-  {
+{
     name: "Salted Almonds (16 oz)",
     categorySlug: "snacks",
     description:
       "Dry-roasted almonds with a light sea salt — a crunchy protein snack.",
     brand: "Nuts & More",
-    price: 6.99,
+    price: 450,
     unit: "16 oz",
     unitAmount: 1,
     stock: 90,
@@ -1537,13 +1537,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1.2,
     },
   },
-  {
+{
     name: "Dark Chocolate 70% (3.5 oz)",
     categorySlug: "snacks",
     description:
       "Rich 70% cacao dark chocolate with a smooth, intense finish.",
     brand: "Sweet Stone",
-    price: 3.99,
+    price: 250,
     unit: "3.5 oz bar",
     unitAmount: 1,
     stock: 85,
@@ -1560,13 +1560,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 11,
     },
   },
-  {
+{
     name: "Sea Salt Potato Chips (8 oz)",
     categorySlug: "snacks",
     description:
       "Crispy kettle-cooked chips with just sea salt and potatoes.",
     brand: "Crunch Point",
-    price: 3.29,
+    price: 120,
     unit: "8 oz bag",
     unitAmount: 1,
     stock: 110,
@@ -1583,13 +1583,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0,
     },
   },
-  {
+{
     name: "Granola Bars Variety (12-pack)",
     categorySlug: "snacks",
     description:
       "Chewy granola bars in a mix of chocolate chip, oats & honey.",
     brand: "Trailside",
-    price: 4.99,
+    price: 300,
     unit: "12-pack",
     unitAmount: 12,
     stock: 100,
@@ -1606,13 +1606,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 8,
     },
   },
-  {
+{
     name: "Trail Mix (14 oz)",
     categorySlug: "snacks",
     description:
       "Roasted nuts, seeds and dried fruit — energy for the trail or office.",
     brand: "Trailside",
-    price: 5.49,
+    price: 380,
     unit: "14 oz",
     unitAmount: 1,
     stock: 78,
@@ -1629,13 +1629,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 9,
     },
   },
-  {
+{
     name: "Classic Hummus (10 oz)",
     categorySlug: "snacks",
     description:
       "Creamy classic hummus made with chickpeas, tahini and olive oil.",
     brand: "Mediterra",
-    price: 3.99,
+    price: 200,
     unit: "10 oz tub",
     unitAmount: 1,
     stock: 68,
@@ -1652,13 +1652,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.3,
     },
   },
-  {
+{
     name: "Sourdough Pretzel Sticks (12 oz)",
     categorySlug: "snacks",
     description:
       "Crunchy sourdough pretzel sticks, lightly salted.",
     brand: "Crunch Point",
-    price: 2.99,
+    price: 190,
     unit: "12 oz bag",
     unitAmount: 1,
     stock: 85,
@@ -1675,13 +1675,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Veggie Straws (6 oz)",
     categorySlug: "snacks",
     description:
       "Crunchy veggie straws made from real potato and vegetables.",
     brand: "Garden Crisp",
-    price: 3.49,
+    price: 130,
     unit: "6 oz bag",
     unitAmount: 1,
     stock: 95,
@@ -1698,13 +1698,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Greek Yogurt Covered Pretzels (6 oz)",
     categorySlug: "snacks",
     description:
       "Crunchy pretzels dipped in creamy Greek yogurt coating.",
     brand: "Sweet Stone",
-    price: 4.29,
+    price: 220,
     unit: "6 oz bag",
     unitAmount: 1,
     stock: 50,
@@ -1721,13 +1721,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 12,
     },
   },
-  {
+{
     name: "Cinnamon Rice Cakes (10-pack)",
     categorySlug: "snacks",
     description:
       "Light, crispy whole grain rice cakes with a cinnamon finish.",
     brand: "Garden Crisp",
-    price: 2.79,
+    price: 150,
     unit: "10-pack",
     unitAmount: 10,
     stock: 105,
@@ -1746,13 +1746,13 @@ export const products: ProductSeed[] = [
   },
 
   // ---- Frozen -------------------------------------------------------------------
-  {
+{
     name: "Frozen Mixed Berries (2 lb)",
     categorySlug: "frozen",
     description:
       "Strawberries, blueberries, raspberries and blackberries — flash frozen.",
     brand: "Arctic Harvest",
-    price: 5.49,
+    price: 650,
     unit: "2 lb bag",
     unitAmount: 2,
     stock: 70,
@@ -1770,13 +1770,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 11,
     },
   },
-  {
+{
     name: "Frozen Peas (1 lb)",
     categorySlug: "frozen",
     description:
       "Sweet garden peas, blanched and frozen at peak freshness.",
     brand: "Arctic Harvest",
-    price: 2.49,
+    price: 140,
     unit: "1 lb bag",
     unitAmount: 1,
     stock: 85,
@@ -1793,13 +1793,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 5,
     },
   },
-  {
+{
     name: "Frozen Shelled Edamame (16 oz)",
     categorySlug: "frozen",
     description:
       "Protein-rich shelled edamame, ready to steam in minutes.",
     brand: "Arctic Harvest",
-    price: 3.99,
+    price: 280,
     unit: "16 oz bag",
     unitAmount: 1,
     stock: 60,
@@ -1816,13 +1816,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 2,
     },
   },
-  {
+{
     name: "Vanilla Bean Ice Cream (1.5 qt)",
     categorySlug: "frozen",
     description:
       "Creamy vanilla bean ice cream churned from real cream and cane sugar.",
     brand: "Sweet Stone",
-    price: 5.99,
+    price: 450,
     unit: "1.5 qt",
     unitAmount: 1,
     stock: 45,
@@ -1839,13 +1839,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 20,
     },
   },
-  {
+{
     name: "Frozen Chopped Spinach (10 oz)",
     categorySlug: "frozen",
     description:
       "Chopped spinach flash-frozen to lock in nutrients.",
     brand: "Arctic Harvest",
-    price: 2.29,
+    price: 120,
     unit: "10 oz box",
     unitAmount: 1,
     stock: 90,
@@ -1862,13 +1862,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 0.6,
     },
   },
-  {
+{
     name: "Four-Cheese Pizza (24 oz)",
     categorySlug: "frozen",
     description:
       "Stone-baked crust topped with mozzarella, parmesan, provolone and romano.",
     brand: "Casa Bella",
-    price: 6.99,
+    price: 450,
     unit: "24 oz",
     unitAmount: 1,
     stock: 55,
@@ -1885,13 +1885,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 4,
     },
   },
-  {
+{
     name: "Frozen Sweet Corn (1 lb)",
     categorySlug: "frozen",
     description:
       "Sweet yellow corn kernels, perfect as a side or stir-fry add-in.",
     brand: "Arctic Harvest",
-    price: 2.19,
+    price: 120,
     unit: "1 lb bag",
     unitAmount: 1,
     stock: 95,
@@ -1908,13 +1908,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 3,
     },
   },
-  {
+{
     name: "Crispy Chicken Nuggets (32 oz)",
     categorySlug: "frozen",
     description:
       "Oven-crisp chicken nuggets made with white meat chicken.",
     brand: "Farmstead",
-    price: 7.49,
+    price: 380,
     unit: "32 oz bag",
     unitAmount: 1,
     stock: 65,
@@ -1931,13 +1931,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 1,
     },
   },
-  {
+{
     name: "Buttermilk Waffles (10-pack)",
     categorySlug: "frozen",
     description:
       "Fluffy buttermilk waffles that crisp up in the toaster.",
     brand: "Golden Crust",
-    price: 3.99,
+    price: 190,
     unit: "10-pack",
     unitAmount: 10,
     stock: 80,
@@ -1954,13 +1954,13 @@ export const products: ProductSeed[] = [
       sugarGrams: 5,
     },
   },
-  {
+{
     name: "Frozen Broccoli Florets (12 oz)",
     categorySlug: "frozen",
     description:
       "Broccoli florets frozen at peak ripeness — steam in minutes.",
     brand: "Arctic Harvest",
-    price: 2.79,
+    price: 180,
     unit: "12 oz bag",
     unitAmount: 1,
     stock: 88,
