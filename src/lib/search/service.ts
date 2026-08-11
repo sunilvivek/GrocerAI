@@ -1,24 +1,9 @@
-import { Prisma } from "@prisma/client"
-
 import { prisma } from "@/lib/prisma"
-import type {
-  ProductMatch,
-  SearchQuery,
-  SearchResponse,
-} from "@/lib/search/domain"
-import {
-  clampScore,
-  combineScores,
-  normalizeKeywordScore,
-} from "@/lib/search/ranking"
+import type { ProductMatch, SearchQuery, SearchResponse } from "@/lib/search/domain"
+import { buildKeywordWhere, KEYWORD_ORDER, keywordSearch } from "@/lib/search/keyword"
+import { combineScores } from "@/lib/search/ranking"
 import { searchProductsByVector } from "@/lib/search/search"
 import { toSearchResult } from "@/lib/search/utils"
-
-/**
- * Maximum raw keyword relevance a product can reach. Used to normalize
- * keyword scores into the 0–1 range (one point per matched field).
- */
-const KEYWORD_FIELDS = 4
 
 /**
  * Minimum cosine similarity for a *semantic-only* candidate to be considered
@@ -26,107 +11,6 @@ const KEYWORD_FIELDS = 4
  * that would otherwise flood the list with unrelated products.
  */
 const MIN_SEMANTIC_SIMILARITY = 0.25
-
-const KEYWORD_ORDER: Record<
-  Exclude<SearchQuery["sort"], "relevance">,
-  Prisma.ProductOrderByWithRelationInput
-> = {
-  "price-asc": { price: "asc" },
-  "price-desc": { price: "desc" },
-  rating: { rating: "desc" },
-  newest: { createdAt: "desc" },
-}
-
-function buildKeywordWhere(
-  q: string,
-  filters: SearchQuery["filters"],
-): Prisma.ProductWhereInput {
-  return {
-    isActive: true,
-    ...(q
-      ? {
-          OR: [
-            { name: { contains: q, mode: "insensitive" } },
-            { description: { contains: q, mode: "insensitive" } },
-            { brand: { contains: q, mode: "insensitive" } },
-            { category: { name: { contains: q, mode: "insensitive" } } },
-          ],
-        }
-      : {}),
-    ...(filters.categorySlug
-      ? { category: { slug: filters.categorySlug } }
-      : {}),
-    ...(filters.minPrice !== undefined
-      ? { price: { gte: filters.minPrice } }
-      : {}),
-    ...(filters.maxPrice !== undefined
-      ? { price: { lte: filters.maxPrice } }
-      : {}),
-    ...(filters.availableOnly ? { stock: { gt: 0 } } : {}),
-  }
-}
-
-/** Counts how many keyword fields a product matches (0–4). */
-function keywordHits(q: string, product: { name: string; description: string | null; brand: string | null; categoryName: string }): number {
-  const needle = q.toLowerCase()
-  let hits = 0
-  if (product.name.toLowerCase().includes(needle)) hits += 1
-  if (product.description?.toLowerCase().includes(needle)) hits += 1
-  if (product.brand?.toLowerCase().includes(needle)) hits += 1
-  if (product.categoryName.toLowerCase().includes(needle)) hits += 1
-  return hits
-}
-
-/**
- * Runs a keyword-only search: rows are fetched with Prisma's `contains` query
- * and sorted by the requested order, then scored by how many fields matched.
- */
-async function keywordSearch(
-  query: SearchQuery,
-): Promise<Array<{ productId: string; keywordScore: number }>> {
-  const where = buildKeywordWhere(query.q, query.filters)
-  const orderBy =
-    query.sort === "relevance"
-      ? { name: "asc" as const }
-      : KEYWORD_ORDER[query.sort]
-
-  const rows = await prisma.product.findMany({
-    where,
-    orderBy,
-    take: query.pageSize * 4,
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      brand: true,
-      category: { select: { name: true } },
-    },
-  })
-
-  const relevanceRows = rows.filter(
-    (row) =>
-      !query.q ||
-      row.name.toLowerCase().includes(query.q.toLowerCase()) ||
-      row.description?.toLowerCase().includes(query.q.toLowerCase()) ||
-      row.brand?.toLowerCase().includes(query.q.toLowerCase()) ||
-      row.category.name.toLowerCase().includes(query.q.toLowerCase()),
-  )
-
-  return relevanceRows.map((row) => ({
-    productId: row.id,
-    keywordScore: clampScore(
-      normalizeKeywordScore(
-        keywordHits(query.q, {
-          name: row.name,
-          description: row.description,
-          brand: row.brand,
-          categoryName: row.category.name,
-        }),
-        KEYWORD_FIELDS,
-      ),
-    ),
-  }))
-}
 
 /**
  * Runs the active search mode and returns a paginated, hybrid-ranked response.
