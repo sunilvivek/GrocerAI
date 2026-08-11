@@ -15,7 +15,8 @@
     "db:admin": "tsx prisma/scripts/make-admin.ts",
     "db:studio": "prisma studio",
     "db:index": "tsx prisma/scripts/index-embeddings.ts",
-    "test:indexing": "tsx prisma/scripts/test-indexing.ts"
+    "test:indexing": "tsx prisma/scripts/test-indexing.ts",
+    "test:search": "tsx prisma/scripts/test-search.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
