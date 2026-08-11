@@ -1,5 +1,6 @@
 "use client"
 
+import { Search } from "lucide-react"
 import Link from "next/link"
 
 import { Container } from "@/components/layout/container"
@@ -48,6 +49,13 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <Link
+            href="/products"
+            aria-label="Search products"
+            className="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <Search className="size-4.5" aria-hidden />
+          </Link>
           <ThemeToggle />
           <CartBadge />
           <AuthActions />

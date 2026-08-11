@@ -1,6 +1,6 @@
 "use client"
 
-import { Menu } from "lucide-react"
+import { Menu, Search } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -35,6 +35,14 @@ export function MobileNav() {
           <SheetTitle className="sr-only">Navigation menu</SheetTitle>
           <Logo />
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+            <Link
+              href="/products"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
+            >
+              <Search className="size-4" aria-hidden />
+              Search products
+            </Link>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

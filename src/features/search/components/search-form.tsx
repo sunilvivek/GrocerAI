@@ -5,6 +5,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useTransition } from "react"
 
+import { cn } from "@/lib/utils"
+
 const SUGGESTIONS = [
   "whole chicken",
   "butter",
@@ -24,9 +26,14 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
   const [isPending, startTransition] = useTransition()
   const [value, setValue] = useState(initialQuery)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     setValue(initialQuery)
+  }, [initialQuery])
+
+  useEffect(() => {
+    if (!initialQuery) inputRef.current?.focus()
   }, [initialQuery])
 
   function navigate(query: string) {
@@ -37,6 +44,11 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
     startTransition(() => {
       router.push(`${pathname}?${url.toString()}`)
     })
+  }
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    navigate(value)
   }
 
   function onChange(next: string) {
@@ -53,12 +65,13 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative">
+      <form onSubmit={onSubmit} className="relative" role="search">
         <Search
           className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />
         <input
+          ref={inputRef}
           type="text"
           value={value}
           onChange={(event) => onChange(event.target.value)}
@@ -70,7 +83,10 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
           <button
             type="button"
             onClick={clear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground hover:text-foreground"
+            className={cn(
+              "absolute top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground hover:text-foreground",
+              isPending ? "right-9" : "right-3",
+            )}
             aria-label="Clear search"
           >
             <X className="size-4" aria-hidden />
@@ -79,7 +95,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
         {isPending ? (
           <span className="absolute right-3 top-1/2 size-4 -translate-y-1/2 animate-spin rounded-full border-2 border-border border-t-primary" />
         ) : null}
-      </div>
+      </form>
 
       <div className="flex flex-wrap items-center gap-2">
         <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
