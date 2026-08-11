@@ -1,6 +1,8 @@
-const currencyFormatter = new Intl.NumberFormat("en-US", {
+import { currencyConfig } from "@/constants/currency"
+
+const currencyFormatter = new Intl.NumberFormat(currencyConfig.locale, {
   style: "currency",
-  currency: "USD",
+  currency: currencyConfig.code,
 })
 
 export function formatCurrency(value: number): string {
