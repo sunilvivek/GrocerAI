@@ -1,22 +1,11 @@
 import { prisma } from "@/lib/prisma"
 import { embedText } from "@/lib/search/embedding"
+import type {
+  ProductMatch,
+  RecipeMatch,
+  SemanticSearchOptions,
+} from "@/lib/search/domain"
 import { toVectorLiteral } from "@/lib/search/vector"
-
-export type SemanticSearchOptions = {
-  limit?: number
-  /** Only return results at least this similar (cosine similarity, 0–1). */
-  minSimilarity?: number
-}
-
-export type ProductMatch = {
-  id: string
-  similarity: number
-}
-
-export type RecipeMatch = {
-  id: string
-  similarity: number
-}
 
 /**
  * Embeds the query and returns product ids ranked by cosine similarity.
