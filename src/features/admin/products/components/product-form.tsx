@@ -257,7 +257,7 @@ export function ProductForm({ mode, productId, initial }: ProductFormProps) {
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price (USD)</FormLabel>
+                  <FormLabel>Price (INR)</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -277,7 +277,7 @@ export function ProductForm({ mode, productId, initial }: ProductFormProps) {
               name="compareAtPrice"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Compare-at price (USD)</FormLabel>
+                  <FormLabel>Compare-at price (INR)</FormLabel>
                   <FormControl>
                     <Input
                       type="number"

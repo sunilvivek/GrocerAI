@@ -14,6 +14,8 @@ import {
   YAxis,
 } from "recharts"
 
+import { formatCurrency } from "@/utils/format"
+
 interface SeriesDatum {
   date: string
   value: number
@@ -49,9 +51,9 @@ export function RevenueChart({ data }: { data: SeriesDatum[] }) {
           tickLine={false}
           axisLine={false}
           width={44}
-          tickFormatter={(value: number) => `$${value}`}
+          tickFormatter={(value: number) => formatCurrency(value)}
         />
-        <Tooltip contentStyle={tooltipStyle} formatter={(value) => [`$${Number(value).toLocaleString()}`, "Revenue"]} />
+        <Tooltip contentStyle={tooltipStyle} formatter={(value) => [formatCurrency(Number(value)), "Revenue"]} />
         <Area
           type="monotone"
           dataKey="value"
