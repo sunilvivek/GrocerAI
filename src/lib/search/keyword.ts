@@ -41,11 +41,13 @@ export function buildKeywordWhere(
     ...(filters.categorySlug
       ? { category: { slug: filters.categorySlug } }
       : {}),
-    ...(filters.minPrice !== undefined
-      ? { price: { gte: filters.minPrice } }
-      : {}),
-    ...(filters.maxPrice !== undefined
-      ? { price: { lte: filters.maxPrice } }
+    ...(filters.minPrice !== undefined || filters.maxPrice !== undefined
+      ? {
+          price: {
+            ...(filters.minPrice !== undefined ? { gte: filters.minPrice } : {}),
+            ...(filters.maxPrice !== undefined ? { lte: filters.maxPrice } : {}),
+          },
+        }
       : {}),
     ...(filters.availableOnly ? { stock: { gt: 0 } } : {}),
   }
