@@ -26,6 +26,7 @@ function slugify(value: string): string {
  *   2. Image URLs are unique (no two products share a photo).
  *   3. URLs use a supported, product-relevant host.
  *   4. Curated images are actually wired into the seed via productImage().
+ *   5. Images are deterministic (locked), so they never collapse to a fallback.
  */
 function main() {
   const missing = products.filter((p) => !productImages[slugify(p.name)])
@@ -54,6 +55,12 @@ function main() {
   assert(
     fallback.startsWith("https://picsum.photos/seed/"),
     "deterministic fallback remains available for unmapped products"
+  )
+
+  const unlocked = urls.filter((url) => !url.includes("?lock="))
+  assert(
+    unlocked.length === 0,
+    `all images are deterministic (locked) (unlocked: ${unlocked.join(", ") || "none"})`
   )
 
   console.log("OK" + (process.exitCode ? " (with failures)" : ""))

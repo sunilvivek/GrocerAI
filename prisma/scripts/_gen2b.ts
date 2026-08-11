@@ -1,0 +1,3 @@
+import { products } from "../data/products"
+const OVERRIDES = ["banana","strawberry","quinoa-seeds","fresh-orange-juice","ground-beef","turkey-meat","cod-fish","salmon-fish","pork-chop","broccoli","matcha-powder","ciabatta","rice-cake","chickpea-hummus","chicken-nugget","chocolate","fire-roasted-tomatoes","green-vegetables","frozen-spinach","mixed-berries","frozen-peas","edamame","sweet-corn","ginger-tea","granola-bar","yogurt-pretzels","cream-milk","avocado","brown-eggs","apple-juice","roasted-turkey","greek-yogurt","honey","salsa-verde","roasted-almonds","potato-crisps","pretzel-sticks","mineral-water","almond-milk","fermented-milk"]
+console.log("override list size:", OVERRIDES.length)
