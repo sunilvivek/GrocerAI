@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 
 import { categories } from "./data/categories"
+import { productImages as images } from "./data/images"
 import { ingredients } from "./data/ingredients"
 import { products } from "./data/products"
 import { recipes } from "./data/recipes"
@@ -17,8 +18,12 @@ function slugify(value: string): string {
     .replace(/^-|-$/g, "")
 }
 
-function productImage(slug: string): string {
-  return `https://picsum.photos/seed/${slug}/600/600`
+/** Product image URL: curated photo when available, deterministic fallback otherwise. */
+function productImage(slug: string, name?: string): string {
+  return (
+    (name && images[slugify(name)]) ||
+    `https://picsum.photos/seed/${slug}/600/600`
+  )
 }
 
 function recipeImage(slug: string): string {
@@ -74,7 +79,9 @@ async function main() {
   for (const product of products) {
     const categoryId = categoryBySlug.get(product.categorySlug)
     if (!categoryId) {
-      console.warn(`  skip product "${product.name}": unknown category ${product.categorySlug}`)
+      console.warn(
+        `  skip product "${product.name}": unknown category ${product.categorySlug}`
+      )
       continue
     }
     const slug = slugify(product.name)
@@ -85,6 +92,7 @@ async function main() {
         categoryId,
         description: product.description,
         brand: product.brand,
+        image: productImage(slug, product.name),
         price: product.price,
         compareAtPrice: product.compareAtPrice,
         unit: product.unit,
@@ -109,7 +117,7 @@ async function main() {
         categoryId,
         description: product.description,
         brand: product.brand,
-        image: productImage(slug),
+        image: productImage(slug, product.name),
         price: product.price,
         compareAtPrice: product.compareAtPrice,
         unit: product.unit,
@@ -167,7 +175,7 @@ async function main() {
       const ingredientId = ingredientBySlug.get(slugify(item.ingredientName))
       if (!ingredientId) {
         console.warn(
-          `  skip recipe ingredient "${item.ingredientName}" in "${recipe.title}": not found`,
+          `  skip recipe ingredient "${item.ingredientName}" in "${recipe.title}": not found`
         )
         continue
       }
