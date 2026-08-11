@@ -354,7 +354,7 @@ model Order {
   status        OrderStatus   @default(PENDING)
   paymentStatus PaymentStatus @default(PENDING)
 
-  // Money fields (all in USD)
+  // Money fields (all in INR, 2 decimal places = paise precision)
   subtotal    Decimal @db.Decimal(10, 2)
   discount    Decimal @default(0) @db.Decimal(10, 2)
   deliveryFee Decimal @default(0) @db.Decimal(10, 2)
