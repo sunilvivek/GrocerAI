@@ -16,7 +16,12 @@
     "db:studio": "prisma studio",
     "db:index": "tsx prisma/scripts/index-embeddings.ts",
     "test:indexing": "tsx prisma/scripts/test-indexing.ts",
-    "test:search": "tsx prisma/scripts/test-search.ts"
+    "test:search": "tsx prisma/scripts/test-search.ts",
+    "test:currency-config": "tsx prisma/scripts/test-currency-config.ts",
+    "test:payment": "tsx prisma/scripts/test-payment.ts",
+    "test:product-images": "tsx prisma/scripts/test-product-images.ts",
+    "test:currency-images": "tsx prisma/scripts/test-currency-images.ts",
+    "test:all": "pnpm test:search && pnpm test:indexing && pnpm test:currency-config && pnpm test:payment && pnpm test:product-images && pnpm test:currency-images"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
