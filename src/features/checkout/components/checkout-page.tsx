@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { CartSummary } from "@/features/cart/components/cart-summary"
 import { CartEmpty } from "@/features/cart/components/cart-empty"
 import { useCart } from "@/features/cart/cart-context"
-import { formatCurrency } from "@/utils/format"
+import { formatCurrencyCompact } from "@/utils/format"
 
 export function CheckoutPage() {
   const { cart, loading, error } = useCart()
@@ -71,11 +71,12 @@ export function CheckoutPage() {
                   {line.product.name}
                 </p>
                 <p className="text-muted-foreground text-xs">
-                  Qty {line.quantity} × {formatCurrency(line.product.price)}
+                  Qty {line.quantity} ×{" "}
+                  {formatCurrencyCompact(line.product.price)}
                 </p>
               </div>
               <p className="text-sm font-medium tabular-nums">
-                {formatCurrency(line.product.price * line.quantity)}
+                {formatCurrencyCompact(line.product.price * line.quantity)}
               </p>
             </li>
           ))}

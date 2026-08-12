@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { ConfirmationDialog } from "@/components/shared/confirmation-dialog"
 import { ProductImage } from "@/components/shared/product-image"
-import { formatCurrency } from "@/utils/format"
+import { formatCurrencyCompact } from "@/utils/format"
 
 export interface ProductRow {
   id: string
@@ -127,10 +127,10 @@ export function ProductsTable({ products }: ProductsTableProps) {
                   </td>
                   <td className="px-4 py-3 tabular-nums">
                     <div>
-                      {formatCurrency(product.price)}
+                      {formatCurrencyCompact(product.price)}
                       {product.compareAtPrice ? (
                         <span className="text-muted-foreground ml-1.5 text-xs line-through">
-                          {formatCurrency(product.compareAtPrice)}
+                          {formatCurrencyCompact(product.compareAtPrice)}
                         </span>
                       ) : null}
                     </div>

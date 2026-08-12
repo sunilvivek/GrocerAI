@@ -10,7 +10,7 @@ import { ProductImage } from "@/components/shared/product-image"
 import { useCart } from "@/features/cart/cart-context"
 import type { SearchResult } from "@/lib/search/domain"
 import { cn } from "@/lib/utils"
-import { formatCurrency } from "@/utils/format"
+import { formatCurrencyCompact } from "@/utils/format"
 
 interface ProductCardProps {
   product: SearchResult
@@ -76,11 +76,11 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="mt-auto flex items-center justify-between gap-2 pt-2">
           <div className="flex items-baseline gap-1.5">
             <span className="text-base font-semibold tabular-nums">
-              {formatCurrency(product.price)}
+              {formatCurrencyCompact(product.price)}
             </span>
             {onSale ? (
               <span className="text-muted-foreground text-xs line-through">
-                {formatCurrency(product.compareAtPrice!)}
+                {formatCurrencyCompact(product.compareAtPrice!)}
               </span>
             ) : null}
           </div>

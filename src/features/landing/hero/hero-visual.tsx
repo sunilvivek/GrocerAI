@@ -4,7 +4,7 @@ import { BadgeCheck, Clock, ShoppingBasket, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 
 import { Badge } from "@/components/ui/badge"
-import { formatCurrency } from "@/utils/format"
+import { formatCurrencyCompact } from "@/utils/format"
 
 const CART_ITEMS = [
   { name: "Rigatoni", quantity: "1 box", price: 2.49 },
@@ -60,7 +60,7 @@ export function HeroVisual() {
                   </span>
                 </div>
                 <span className="text-sm font-semibold tabular-nums">
-                  {formatCurrency(item.price)}
+                  {formatCurrencyCompact(item.price)}
                 </span>
               </li>
             ))}
@@ -70,7 +70,7 @@ export function HeroVisual() {
             <div>
               <p className="text-xs text-muted-foreground">Estimated total</p>
               <p className="text-xl font-bold tabular-nums">
-                {formatCurrency(CART_TOTAL)}
+                {formatCurrencyCompact(CART_TOTAL)}
               </p>
             </div>
             <div className="flex flex-col items-end gap-0.5">
@@ -79,7 +79,7 @@ export function HeroVisual() {
                 12 min prep
               </span>
               <span className="text-xs text-muted-foreground">
-                You save {formatCurrency(SAVED)} vs. takeout
+                You save {formatCurrencyCompact(SAVED)} vs. takeout
               </span>
             </div>
           </div>

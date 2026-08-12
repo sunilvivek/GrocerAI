@@ -7,7 +7,7 @@ import { ProductImage } from "@/components/shared/product-image"
 
 import { Button } from "@/components/ui/button"
 import type { CartLineItem } from "@/lib/cart/types"
-import { formatCurrency } from "@/utils/format"
+import { formatCurrencyCompact } from "@/utils/format"
 
 import { QuantitySelector } from "@/features/cart/components/quantity-selector"
 
@@ -55,7 +55,7 @@ export function CartLineItem({
             </p>
           </div>
           <p className="text-sm font-semibold tabular-nums">
-            {formatCurrency(lineTotal)}
+            {formatCurrencyCompact(lineTotal)}
           </p>
         </div>
 
