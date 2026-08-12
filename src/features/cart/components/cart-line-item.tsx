@@ -1,8 +1,9 @@
 "use client"
 
 import { ShoppingBasket, Trash2 } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
+
+import { ProductImage } from "@/components/shared/product-image"
 
 import { Button } from "@/components/ui/button"
 import type { CartLineItem } from "@/lib/cart/types"
@@ -27,22 +28,16 @@ export function CartLineItem({
   const lineTotal = product.price * line.quantity
 
   return (
-    <li className="flex gap-4 border-b border-border py-4 last:border-b-0 sm:gap-6">
+    <li className="border-border flex gap-4 border-b py-4 last:border-b-0 sm:gap-6">
       <Link
         href={`/products/${product.slug}`}
-        className="relative block size-20 shrink-0 overflow-hidden rounded-xl border border-border sm:size-24"
+        className="border-border relative block size-20 shrink-0 overflow-hidden rounded-xl border sm:size-24"
       >
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(min-width: 640px) 6rem, 5rem"
-            className="object-cover"
-          />
-        ) : (
-          <div className="flex size-full items-center justify-center bg-muted" />
-        )}
+        <ProductImage
+          src={product.image}
+          alt={product.name}
+          sizes="(min-width: 640px) 6rem, 5rem"
+        />
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2">
@@ -54,12 +49,14 @@ export function CartLineItem({
             >
               {product.name}
             </Link>
-            <p className="mt-0.5 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mt-0.5 text-xs">
               {product.brand ? `${product.brand} · ` : ""}
               {product.unit}
             </p>
           </div>
-          <p className="text-sm font-semibold tabular-nums">{formatCurrency(lineTotal)}</p>
+          <p className="text-sm font-semibold tabular-nums">
+            {formatCurrency(lineTotal)}
+          </p>
         </div>
 
         <div className="mt-auto flex flex-wrap items-center justify-between gap-3">

@@ -1,7 +1,6 @@
 "use client"
 
 import { Pencil, Trash2 } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -10,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { ConfirmationDialog } from "@/components/shared/confirmation-dialog"
+import { ProductImage } from "@/components/shared/product-image"
 import { formatCurrency } from "@/utils/format"
 
 export interface ProductRow {
@@ -72,7 +72,9 @@ export function ProductsTable({ products }: ProductsTableProps) {
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-12 text-center">
-        <p className="text-sm text-muted-foreground">No products match your filters.</p>
+        <p className="text-muted-foreground text-sm">
+          No products match your filters.
+        </p>
         <Button asChild variant="outline" size="sm">
           <Link href="/admin/products/new">Create a product</Link>
         </Button>
@@ -82,11 +84,11 @@ export function ProductsTable({ products }: ProductsTableProps) {
 
   return (
     <>
-      <div className="overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
+      <div className="bg-card ring-foreground/10 overflow-hidden rounded-xl ring-1">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-sm">
             <thead>
-              <tr className="border-b border-border text-left text-xs text-muted-foreground">
+              <tr className="border-border text-muted-foreground border-b text-left text-xs">
                 <th className="px-4 py-3 font-medium">Product</th>
                 <th className="px-4 py-3 font-medium">Category</th>
                 <th className="px-4 py-3 font-medium">Price</th>
@@ -95,22 +97,17 @@ export function ProductsTable({ products }: ProductsTableProps) {
                 <th className="px-4 py-3 text-right font-medium">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {products.map((product) => (
                 <tr key={product.id} className="hover:bg-muted/40">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-muted">
-                        {product.image ? (
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            sizes="40px"
-                            className="object-cover"
-                            unoptimized
-                          />
-                        ) : null}
+                      <div className="bg-muted relative size-10 shrink-0 overflow-hidden rounded-lg">
+                        <ProductImage
+                          src={product.image}
+                          alt={product.name}
+                          sizes="40px"
+                        />
                       </div>
                       <div className="min-w-0">
                         <Link
@@ -119,7 +116,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         >
                           {product.name}
                         </Link>
-                        <p className="truncate text-xs text-muted-foreground">
+                        <p className="text-muted-foreground truncate text-xs">
                           {product.sku ?? product.slug}
                         </p>
                       </div>
@@ -132,7 +129,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                     <div>
                       {formatCurrency(product.price)}
                       {product.compareAtPrice ? (
-                        <span className="ml-1.5 text-xs text-muted-foreground line-through">
+                        <span className="text-muted-foreground ml-1.5 text-xs line-through">
                           {formatCurrency(product.compareAtPrice)}
                         </span>
                       ) : null}
@@ -159,14 +156,19 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         onCheckedChange={() => handleToggle(product)}
                         aria-label={`${product.isActive ? "Deactivate" : "Activate"} ${product.name}`}
                       />
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-muted-foreground text-xs">
                         {product.isActive ? "Active" : "Inactive"}
                       </span>
                     </div>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1">
-                      <Button asChild variant="ghost" size="icon-sm" aria-label={`Edit ${product.name}`}>
+                      <Button
+                        asChild
+                        variant="ghost"
+                        size="icon-sm"
+                        aria-label={`Edit ${product.name}`}
+                      >
                         <Link href={`/admin/products/${product.id}/edit`}>
                           <Pencil aria-hidden />
                         </Link>

@@ -1,7 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
+
+import { ProductImage } from "@/components/shared/product-image"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -31,7 +32,7 @@ export function CheckoutPage() {
   if (error) {
     return (
       <div className="flex flex-col items-center gap-3 py-20 text-center">
-        <p className="text-sm text-muted-foreground">{error}</p>
+        <p className="text-muted-foreground text-sm">{error}</p>
         <Button variant="outline" onClick={() => location.reload()}>
           Try again
         </Button>
@@ -41,7 +42,10 @@ export function CheckoutPage() {
 
   if (!cart || cart.items.length === 0) {
     return (
-      <CartEmpty title="Nothing to check out" description="Your cart is empty and there's nothing to order." />
+      <CartEmpty
+        title="Nothing to check out"
+        description="Your cart is empty and there's nothing to order."
+      />
     )
   }
 
@@ -49,28 +53,24 @@ export function CheckoutPage() {
     <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
       <div>
         <h2 className="mb-4 text-base font-semibold">Order items</h2>
-        <ul className="divide-y divide-border rounded-2xl border border-border">
+        <ul className="divide-border border-border divide-y rounded-2xl border">
           {cart.items.map((line) => (
             <li key={line.id} className="flex items-center gap-4 p-4">
               <Link
                 href={`/products/${line.product.slug}`}
-                className="relative block size-14 shrink-0 overflow-hidden rounded-lg border border-border"
+                className="border-border relative block size-14 shrink-0 overflow-hidden rounded-lg border"
               >
-                {line.product.image ? (
-                  <Image
-                    src={line.product.image}
-                    alt={line.product.name}
-                    fill
-                    sizes="3.5rem"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="size-full bg-muted" />
-                )}
+                <ProductImage
+                  src={line.product.image}
+                  alt={line.product.name}
+                  sizes="3.5rem"
+                />
               </Link>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{line.product.name}</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="truncate text-sm font-medium">
+                  {line.product.name}
+                </p>
+                <p className="text-muted-foreground text-xs">
                   Qty {line.quantity} × {formatCurrency(line.product.price)}
                 </p>
               </div>

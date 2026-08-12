@@ -1,12 +1,12 @@
 "use client"
 
 import { ShoppingCart, Star } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { ProductImage } from "@/components/shared/product-image"
 import { useCart } from "@/features/cart/cart-context"
 import type { SearchResult } from "@/lib/search/domain"
 import { cn } from "@/lib/utils"
@@ -20,7 +20,8 @@ export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart()
   const [adding, setAdding] = useState(false)
 
-  const onSale = product.compareAtPrice !== null && product.compareAtPrice > product.price
+  const onSale =
+    product.compareAtPrice !== null && product.compareAtPrice > product.price
 
   async function handleAdd() {
     setAdding(true)
@@ -29,45 +30,43 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-border hover:shadow-lg hover:shadow-black/5">
+    <article className="group border-border bg-card/60 hover:border-border flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5">
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden border-b border-border"
+        className="border-border relative block aspect-square overflow-hidden border-b"
       >
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(min-width: 768px) 25vw, 50vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex size-full items-center justify-center bg-muted" />
-        )}
+        <ProductImage
+          src={product.image}
+          alt={product.name}
+          sizes="(min-width: 768px) 25vw, 50vw"
+          className="transition-transform duration-300 group-hover:scale-105"
+        />
         {onSale ? (
-          <Badge className="absolute left-3 top-3 bg-destructive text-white hover:bg-destructive">
+          <Badge className="bg-destructive hover:bg-destructive absolute top-3 left-3 text-white">
             Sale
           </Badge>
         ) : null}
       </Link>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
           {product.category.name}
         </p>
         <Link
           href={`/products/${product.slug}`}
-          className="line-clamp-2 text-sm font-semibold leading-snug hover:underline"
+          className="line-clamp-2 text-sm leading-snug font-semibold hover:underline"
         >
           {product.name}
         </Link>
         {product.brand ? (
-          <p className="text-xs text-muted-foreground">{product.brand}</p>
+          <p className="text-muted-foreground text-xs">{product.brand}</p>
         ) : null}
 
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Star className="size-3.5 fill-amber-400 text-amber-400" aria-hidden />
+        <div className="text-muted-foreground flex items-center gap-1.5 text-xs">
+          <Star
+            className="size-3.5 fill-amber-400 text-amber-400"
+            aria-hidden
+          />
           <span className="font-medium tabular-nums">
             {product.rating.toFixed(1)}
           </span>
@@ -80,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps) {
               {formatCurrency(product.price)}
             </span>
             {onSale ? (
-              <span className="text-xs text-muted-foreground line-through">
+              <span className="text-muted-foreground text-xs line-through">
                 {formatCurrency(product.compareAtPrice!)}
               </span>
             ) : null}
