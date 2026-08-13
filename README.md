@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartCart AI — GrocerAI
+
+**SmartCart AI** is a full-stack AI grocery assistant. Describe a meal in plain
+English ("butter for baking") and it uses hybrid search — keyword + semantic
+embeddings — to find matching products, builds a cart, and lets you check out
+with Razorpay.
+
+## Stack
+
+- **Framework:** Next.js 15 (App Router) + React 19 + TypeScript
+- **Styling:** Tailwind CSS v4 + shadcn/ui (Radix UI, CVA, tw-animate-css)
+- **Database:** PostgreSQL via Prisma ORM
+- **Auth:** Better Auth (email/password + Google OAuth, RBAC for admins)
+- **AI:** Vercel AI SDK + OpenAI (assistant chat, `text-embedding-3-small`)
+- **Search:** Hybrid — keyword search + local on-device embeddings
+  (`@huggingface/transformers`) or OpenAI embeddings, hybrid relevance ranking
+- **Payments:** Razorpay (amounts handled as paise)
+- **Currency:** INR (`en-IN`) via a shared formatter
+- **Fonts:** Geist (Sans + Mono) via `next/font/google`
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local   # fill in values (see below)
+pnpm db:seed                 # load grocery catalog + recipes
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See [`.env.example`](.env.example) for the full list. Notable ones:
 
-## Learn More
+| Variable                     | Purpose                                          |
+| ---------------------------- | ------------------------------------------------ |
+| `DATABASE_URL`               | PostgreSQL connection string                     |
+| `BETTER_AUTH_SECRET`         | Session cookie signing secret                    |
+| `BETTER_AUTH_URL`            | Auth base URL                                    |
+| `GOOGLE_CLIENT_ID/SECRET`    | Google OAuth (optional)                          |
+| `OPENAI_API_KEY`             | API key for assistant + embedding (optional)     |
+| `OPENAI_MODEL`               | Assistant model (default `gpt-4o-mini`)          |
+| `OPENAI_EMBEDDING_MODEL`     | Embedding model (default `text-embedding-3-small`) |
+| `EMBEDDING_PROVIDER`         | `local` (default, free) or `openai`              |
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev              # dev server
+pnpm build            # production build
+pnpm lint             # eslint
+pnpm typecheck        # tsc --noEmit
+pnpm check            # lint + typecheck
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+pnpm db:seed          # seed catalog
+pnpm db:studio        # Prisma Studio
+pnpm db:admin         # promote a user to admin
+pnpm db:index         # build search embeddings for all products
 
-## Deploy on Vercel
+pnpm test:all         # run all verification suites (search/indexing/currency/payment/images)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Landing page** — hero, categories, how-it-works, features, testimonials, FAQ
+- **Auth** — sign-up, sign-in, forgot-password, profile + settings, admin RBAC
+- **Catalog** — 85 products across categories, curated images with accessible
+  fallbacks, recipes with ingredients and notes
+- **Search** — natural-language input, keyword + semantic hybrid ranking,
+  filters (category, price, rating) and pagination
+- **Cart** — persistent (cookie-backed) cart, quantity controls, merge on sign-in
+- **Checkout** — order creation with Razorpay (INR/paise), order + payment status
+- **Admin** — dashboard analytics, product/category/recipe CRUD with image audit
+- **AI assistant** — `/api/ai/chat` chat endpoint for meal-to-cart help
+
+## Project Structure
+
+```text
+prisma/                # schema, seed data (products, images, recipes), scripts
+  scripts/             # make-admin, index-embeddings, test-* verification suites
+src/
+  app/                 # App Router: (auth), (marketing), (protected), admin, api
+  components/          # shared + shadcn/ui components
+  constants/           # app name, nav, currency config
+  features/            # admin, auth, cart, checkout, landing, profile, search, settings
+  lib/                 # ai, auth, cart, prisma, search (embedding providers)
+  utils/               # format.ts — INR formatters + rupees↔paise
+  middleware.ts        # custom middleware
+```
+
+## Tests
+
+Verification suites live in `prisma/scripts/` and are run with `pnpm test:*`.
+They validate embedding indexing, hybrid search ranking, INR currency
+formatting, Razorpay paise handling, and product image consistency against the
+seed data.
