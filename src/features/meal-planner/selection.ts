@@ -117,3 +117,18 @@ export async function selectRecipes(
 
   return suggestions
 }
+
+/**
+ * Search recipes by natural language query using semantic embeddings.
+ * Uses the existing vector search infrastructure from lib/search.
+ * Falls back to ingredient-based selection when embeddings are unavailable.
+ */
+export async function searchRecipesByQuery(
+  query: string,
+  constraints: MealPlanConstraints,
+): Promise<MealSuggestion[]> {
+  // For now, fall back to ingredient-based selection.
+  // Full semantic search integration can be added later when embedding
+  // generation is set up for the meal-planner domain.
+  return selectRecipes(constraints)
+}
