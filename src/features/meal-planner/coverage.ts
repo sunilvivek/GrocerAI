@@ -270,15 +270,42 @@ export async function createMealPlan(
   const lines: string[] = []
   lines.push(`YOUR MEAL PLAN (${totalMeals} meals over ${daysCount} days)`)
   lines.push("")
+  // Diet label
+  const dietDisplay = constraints.dietary
+    ? `Diet: ${constraints.dietary}`.trim()
+    : ""
+  const reuseDisplay = constraints.reuseIngredients
+    ? `Ingredient reuse enabled`.trim()
+    : ""
+  if (dietDisplay) {
+    lines.push(dietDisplay)
+  } else if (reuseDisplay) {
+    lines.push(reuseDisplay)
+  }
+  lines.push(`Persons: ${constraints.persons ?? 1}`)
+  lines.push(`Meals per day: ${constraints.mealsPerDay ?? 1}`)
+  lines.push(`Days: ${daysCount}`)
+  lines.push("")
+
   for (let d = 0; d < daysCount; d++) {
-    lines.push(`DAY ${daysMeals[d].day}`)
+    const dietLabel = constraints.dietary
+      ? `Diet: ${constraints.dietary}`.trim()
+      : ""
+    const reuseLabel = constraints.reuseIngredients
+      ? `(ingredient reuse)`
+      : ""
+    const dietReuseLabel = dietLabel ? `${dietLabel} ${reuseLabel}`.trim() : reuseLabel
+    lines.push(`DAY ${d + 1} — ${dietReuseLabel}`)
     for (const meal of daysMeals[d].meals) {
       const m = meal as Meal
       lines.push(`  • ${m.title} — ${m.totalTimeMinutes} min`)
     }
   }
+
+  lines.push("")
   lines.push(`Estimated additional grocery cost: ₹${additionalCost}`)
   lines.push("")
+
   if (constraints.budget !== undefined) {
     const remaining = constraints.budget - additionalCost
     lines.push(`Budget: ₹${constraints.budget} — Remaining: ₹${remaining >= 0 ? remaining : 0}`)
