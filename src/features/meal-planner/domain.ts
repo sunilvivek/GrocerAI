@@ -89,6 +89,26 @@ export type MissingIngredient = {
 }
 
 /**
+ * A published recipe from the catalog.
+ * Matches the Prisma Recipe model shape for ingredient coverage scoring.
+ */
+export type Recipe = {
+  id: string
+  title: string
+  slug?: string
+  description?: string
+  cuisine?: string
+  difficulty?: "EASY" | "MEDIUM" | "HARD"
+  prepTimeMinutes?: number
+  cookTimeMinutes?: number
+  servings?: number
+  caloriesPerServing?: number
+  tags?: string[]
+  image?: string
+  ingredients: RecipeIngredient[]
+}
+
+/**
  * Preferences that influence meal selection.
  */
 export type MealPlanPreferences = {
