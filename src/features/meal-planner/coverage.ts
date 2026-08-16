@@ -78,6 +78,76 @@ function calculateMissingIngredientsCost(
   return total
 }
 
+// Generate simple cooking instructions based on recipe title
+function generateCookingInstructions(title: string): string[] {
+  const lower = title.toLowerCase()
+  const baseInstructions: string[] = [
+    "Prep all ingredients: wash, chop, and measure everything before starting.",
+    "Heat oil or butter in a pan or pot over medium heat.",
+    "Add aromatics (onion, garlic, ginger) and sauté until fragrant.",
+    "Add main ingredients and cook until softened or changed in color.",
+    "Season with spices and salt to taste.",
+    "Add liquid (water, stock, or coconut milk) if needed, then simmer.",
+    "Cook until ingredients are tender and flavors are blended.",
+    "Serve hot with rice, bread, or as desired.",
+  ]
+
+  // Simple keyword-based variation
+  if (lower.includes("curry")) {
+    return [
+      "Heat oil in a deep pan or kadhai.",
+      "Add cumin seeds and let them splutter.",
+      "Add chopped onion and sauté until golden brown.",
+      "Add ginger-garlic paste and cook for 1 minute.",
+      "Add tomato puree and spices; cook until oil separates.",
+      "Add main ingredient (vegetable, chicken, or fish) and cook.",
+      "Add water and salt; cover and simmer for 20-25 minutes.",
+      "Garnish with fresh coriander and serve with rice or bread.",
+    ]
+  }
+  if (lower.includes("rice")) {
+    return [
+      "Rinse the rice thoroughly until water runs clear.",
+      "Add rice and water to a pot in a 1:2 ratio (1 cup rice : 2 cups water).",
+      "Bring to a boil, then reduce heat to low and cover.",
+      "Simmer for 15-20 minutes until water is absorbed and rice is tender.",
+      "Fluff with a fork and let rest for 5 minutes before serving.",
+    ]
+  }
+  if (lower.includes("soup")) {
+    return [
+      "Sauté onion, carrot, and celery in a pot with oil until soft.",
+      "Add stock (vegetable, chicken, or fish) and bring to a simmer.",
+      "Add main ingredients (vegetables, meat, or legumes) and cook.",
+      "Season with salt, pepper, and herbs to taste.",
+      "Simmer for 20-30 minutes until ingredients are tender.",
+      "Adjust seasoning and serve hot.",
+    ]
+  }
+  if (lower.includes("salad")) {
+    return [
+      "Wash and chop all vegetables and fruits.",
+      "Toss ingredients in a large bowl with dressing (oil, vinegar, herbs).",
+      "Season with salt and pepper to taste.",
+      "Add nuts or seeds for crunch, if desired.",
+      "Serve immediately or chill until ready to eat.",
+    ]
+  }
+  if (lower.includes("dessert")) {
+    return [
+      "Prepare all ingredients and measure them before starting.",
+      "Mix dry ingredients (flour, sugar, cocoa, baking powder) in a bowl.",
+      "Mix wet ingredients (eggs, milk, oil, vanilla) in a separate bowl.",
+      "Combine wet and dry ingredients, stirring until just combined.",
+      "Pour batter into a greased pan and bake at the specified temperature.",
+      "Test doneness with a toothpick; it should come out clean.",
+      "Cool slightly before serving.",
+    ]
+  }
+
+  return baseInstructions
+}
+
 export async function createMealPlan(
   constraints: MealPlanConstraints,
   availableIngredients: AvailableIngredient[],
@@ -154,6 +224,9 @@ export async function createMealPlan(
     )
     totalMissingCost += recipeMissingCost
 
+    // Generate cooking instructions for this recipe
+    const instructions = generateCookingInstructions(recipe.title)
+
     day.meals.push({
       id: crypto.randomUUID(),
       title: recipe.title,
@@ -167,7 +240,7 @@ export async function createMealPlan(
       selectedRecipeIngredients: rIngMap,
       availableIngredients: constraints.availableIngredients,
       missingIngredients: recipe.missingIngredients,
-      instructions: [],
+      instructions,
       missingCost: recipeMissingCost,
     })
 
