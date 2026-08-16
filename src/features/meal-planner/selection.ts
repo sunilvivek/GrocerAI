@@ -28,22 +28,6 @@ function totalMinutesFromRecipe(r: {
   return prep + cook
 }
 
-// Normalize a Prisma Recipe ingredient array into our internal shape
-function normalizeIngredients(
-  ingredients: {
-    /** Prisma adds _count metadata; this is the actual ingredients array */
-    ingredients?: RecipeIngredient[]
-  },
-): RecipeIngredient[] {
-  if (!Array.isArray(ingredients?.ingredients)) return []
-  return ingredients.ingredients.map((ing: RecipeIngredient) => ({
-    name: ing.name,
-    normalized: ing.name?.toLowerCase() ?? "",
-    quantity: ing.quantity ?? 1,
-    unit: ing.unit ?? "unit",
-  }))
-}
-
 export async function selectRecipes(
   constraints: MealPlanConstraints,
 ): Promise<MealSuggestion[]> {
