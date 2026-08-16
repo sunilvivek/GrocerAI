@@ -27,6 +27,57 @@ function totalMinutesFromRecipe(recipe: { prepTimeMinutes?: number; cookTimeMinu
   return prep + cook
 }
 
+// Simple ingredient pricing map (₹ per unit)
+// In a full implementation, this would come from a grocery pricing service/catalog
+const INGREDIENT_PRICES: Record<string, number> = {
+  wheat: 20,
+  flour: 20,
+  rice: 50,
+  sugar: 30,
+  salt: 10,
+  oil: 100,
+  spices: 15,
+  vegetables: 25,
+  fruits: 30,
+  meat: 400,
+  chicken: 300,
+  fish: 350,
+  eggs: 12,
+  dairy: 25,
+  lentils: 80,
+  onions: 10,
+  tomatoes: 15,
+  potatoes: 12,
+  garlic: 10,
+  ginger: 15,
+  yogurt: 20,
+  butter: 50,
+  cream: 60,
+}
+
+// Calculate cost for a single missing ingredient
+function missingIngredientCost(
+  name: string,
+  required: number,
+  available: number,
+): number {
+  const normalized = name.toLowerCase().trim()
+  const pricePerUnit = INGREDIENT_PRICES[normalized] ?? 15 // default ₹15/unit
+  const toPurchase = Math.max(0, required - available)
+  return Math.round(pricePerUnit * toPurchase)
+}
+
+// Calculate total cost for all missing ingredients
+function calculateMissingIngredientsCost(
+  missingIngredients: MissingIngredient[],
+): number {
+  let total = 0
+  for (const mi of missingIngredients) {
+    total += missingIngredientCost(mi.name, mi.required, mi.available ?? 0)
+  }
+  return total
+}
+
 export async function createMealPlan(
   constraints: MealPlanConstraints,
   availableIngredients: AvailableIngredient[],
@@ -73,8 +124,9 @@ export async function createMealPlan(
     daysMeals.push({ day: d + 1, meals: [] } as MealPlanDay)
   }
 
-  // Step 2.5: Track ingredient coverage per day
+  // Step 2.5: Track ingredient coverage per day and accumulate costs
   const dayCoverage: number[] = new Array(daysCount).fill(0)
+  let totalMissingCost = 0
 
   // Step 3: Distribute recipes across days
   for (let i = 0; i < daysCount * mealsPerDay && i < sorted.length; i++) {
@@ -96,6 +148,12 @@ export async function createMealPlan(
       }
     }
 
+    // Calculate missing ingredients cost for this recipe
+    const recipeMissingCost = calculateMissingIngredientsCost(
+      recipe.missingIngredients,
+    )
+    totalMissingCost += recipeMissingCost
+
     day.meals.push({
       id: crypto.randomUUID(),
       title: recipe.title,
@@ -108,9 +166,9 @@ export async function createMealPlan(
       servings: 4,
       selectedRecipeIngredients: rIngMap,
       availableIngredients: constraints.availableIngredients,
-      missingIngredients: [],
+      missingIngredients: recipe.missingIngredients,
       instructions: [],
-      missingCost: 0,
+      missingCost: recipeMissingCost,
     })
 
     // Update coverage tracking
@@ -132,7 +190,10 @@ export async function createMealPlan(
     0,
   )
 
-  const additionalCost = 0 // placeholder - Phase 8
+  const additionalCost = totalMissingCost
+  const totalCost = additionalCost // in this plan, additional = total since pantry is separate
+  const coveredByPantry = 0 // placeholder - Phase 9
+
   const lines: string[] = []
   lines.push(`YOUR MEAL PLAN (${totalMeals} meals over ${daysCount} days)`)
   lines.push("")
@@ -167,8 +228,8 @@ export async function createMealPlan(
     constraints,
     cost: {
       additionalCost,
-      totalCost: 0,
-      coveredByPantry: 0,
+      totalCost,
+      coveredByPantry,
     },
     summary: lines.join("\n"),
   }
